@@ -80,7 +80,6 @@ function CartProviderWrapper(props) {
     const totalQuantity = cartArray.reduce((previousItem, currentItem) => {
       return previousItem + currentItem.quantityInCart;
     }, 0);
-    console.log(">>>>>>>>>>>>>", totalQuantity);
     return totalQuantity;
   };
 
