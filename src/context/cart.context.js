@@ -50,6 +50,7 @@ function CartProviderWrapper(props) {
           copyOfCartArray.splice(i, 1);
           setCartCount(cartCount - 1);
           removed = true;
+          console.log(removed);
         }
       } else {
         console.log("product not in the array, can't remove !");
@@ -71,7 +72,6 @@ function CartProviderWrapper(props) {
     const totalAmount = cartArray.reduce((previousItem, currentItem) => {
       return previousItem + currentItem.quantityInCart * currentItem.price;
     }, 0);
-    console.log(">>>>>>>>>>>>>", totalAmount);
     return totalAmount - discount > 0 ? totalAmount - discount : 0;
   };
 
