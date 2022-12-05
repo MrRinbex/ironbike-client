@@ -181,14 +181,14 @@ const ShoppingCart = () => {
       try {
         await publicRequest.post("/checkout/payment", {
           tokenId: stripeToken.id,
-          amount: (getTotalToPay() > 1000
-          ? getTotalToPay() - 150
-          : getTotalToPay()) * 100,
+          amount:
+            (getTotalToPay() > 1000 ? getTotalToPay() - 150 : getTotalToPay()) *
+            100,
           user: user,
           userToken: userToken,
         });
-        localStorage.setItem('stripe-token', stripeToken.id);
-        console.log('stripe-token', stripeToken.id);
+        localStorage.setItem("stripe-token", stripeToken.id);
+        console.log("stripe-token", stripeToken.id);
 
         await getCartQuantity(0);
         await setCartArray([]);
@@ -198,7 +198,15 @@ const ShoppingCart = () => {
       }
     };
     stripeToken && makeRequest();
-  }, [stripeToken, navigate, setCartArray, getTotalToPay, user, userToken]);
+  }, [
+    stripeToken,
+    navigate,
+    setCartArray,
+    getTotalToPay,
+    user,
+    userToken,
+    getCartQuantity,
+  ]);
 
   return (
     <Container>
@@ -312,9 +320,11 @@ const ShoppingCart = () => {
                     ? (getTotalToPay() - 150).toFixed(2)
                     : getTotalToPay().toFixed(2)
                 } €`}
-                amount={getTotalToPay() > 1000
-                    ? ((getTotalToPay() - 150)* 100).toFixed(2)
-                    : (getTotalToPay() * 100).toFixed(2)}
+                amount={
+                  getTotalToPay() > 1000
+                    ? ((getTotalToPay() - 150) * 100).toFixed(2)
+                    : (getTotalToPay() * 100).toFixed(2)
+                }
                 token={onToken}
                 stripeKey={STRIPE_KEY}
                 local="auto"
@@ -325,16 +335,16 @@ const ShoppingCart = () => {
             ) : (
               <>
                 <span className="spanProcessing">
-                  Please connect to your account add product to the cart to
-                  make the checkout
+                  Please connect to your account add product to the cart to make
+                  the checkout
                 </span>
                 <div className="btnDownCartPage">
-                <Link to="/login" className="Link">
-                  <MenuItem>LOG IN</MenuItem>
-                </Link>
-                <Link to="/signup" className="Link">
-                  <MenuItem>SIGN UP</MenuItem>
-                </Link>
+                  <Link to="/login" className="Link">
+                    <MenuItem>LOG IN</MenuItem>
+                  </Link>
+                  <Link to="/signup" className="Link">
+                    <MenuItem>SIGN UP</MenuItem>
+                  </Link>
                 </div>
               </>
             )}
